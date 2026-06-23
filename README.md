@@ -46,14 +46,7 @@ CleanerService/
 
 ### Option 1 — Using the batch file (Recommended)
 
-1. Publish the project:
-```bash
-dotnet publish -c Release -r win-x64 --self-contained false -o ./publish
-```
-
-2. Copy `install.bat` and `uninstall.bat` into the `publish` folder alongside `CleanerService.exe`
-
-3. Right-click `install.bat` → **Run as Administrator**
+- Right-click `install.bat` → **Run as Administrator**
 
 That's it — the service will be installed and started automatically.
 
@@ -97,7 +90,6 @@ Look for entries under the source `CleanerService`.
 
 ## Notes
 
-- The batch files must be in the **same folder** as `CleanerService.exe`
 - Files currently in use by other processes are **skipped safely** and logged as warnings
 - The service starts automatically on Windows startup after installation
 

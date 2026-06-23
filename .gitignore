@@ -1,1 +1,10 @@
+bin/
+obj/
+*.user
+*.suo
 .vs/
+publish/
+
+*.log
+Logs/
+ServiceLogs/
