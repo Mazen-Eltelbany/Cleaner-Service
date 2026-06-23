@@ -100,3 +100,4 @@ D:\reprository\Cleaner-Service\CleanerService\obj\Release\net8.0\refint\CleanerS
 D:\reprository\Cleaner-Service\CleanerService\obj\Release\net8.0\CleanerService.pdb
 D:\reprository\Cleaner-Service\CleanerService\obj\Release\net8.0\CleanerService.genruntimeconfig.cache
 D:\reprository\Cleaner-Service\CleanerService\obj\Release\net8.0\ref\CleanerService.dll
+D:\reprository\Cleaner-Service\CleanerService\obj\Release\net8.0\CleanerService.sourcelink.json
