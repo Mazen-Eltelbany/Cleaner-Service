@@ -4,10 +4,35 @@ namespace CleanerService
     {
         private readonly ILogger<CleanService> _logger;
         private readonly string CleanPathFolder1 = @"C:\Windows\Temp";
-        private readonly string CleanPathFolder2 = Path.GetTempPath();
         public CleanService(ILogger<CleanService> logger)
         {
             _logger = logger;
+        }
+        private List<string> GetPaths()
+        {
+            List<string> paths = new List<string>()
+            {
+                CleanPathFolder1
+            };
+            string userroot = @"C:\Users";
+            if (Directory.Exists(userroot))
+            {
+                foreach (string path in Directory.GetDirectories(userroot))
+                {
+                    string folderName= Path.GetFileName(path);
+                    if(folderName is "Public" or "Default" or "Default User" or "All Users")
+                    {
+                        continue;
+                    }
+                    string usertemp = Path.Combine(path, @"AppData\Local\Temp");
+                    if (Directory.Exists(usertemp))
+                    {
+                        paths.Add(usertemp);
+                    }
+                }
+
+            }
+            return paths;
         }
         public override async Task StartAsync(CancellationToken cancellationToken)
         {
@@ -35,7 +60,6 @@ namespace CleanerService
             try
             {
                 File.Delete(file);
-                Console.WriteLine($"Deleted file: {file}");
                 _logger.LogInformation("Deleted file: {file}", file);
             }
             catch (IOException)
@@ -48,7 +72,6 @@ namespace CleanerService
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Failed to delete {file}: {ex.Message}");
                 _logger.LogError("Failed to delete {file}: {msg}", file, ex.Message);
             }
         }
@@ -80,9 +103,10 @@ namespace CleanerService
             while (!stoppingToken.IsCancellationRequested)
             {
                 _logger.LogInformation("Cleaning started at: {time}", DateTimeOffset.Now);
-
-                CleanDirectory(CleanPathFolder1);
-                CleanDirectory(CleanPathFolder2);
+                foreach(var path in GetPaths())
+                {
+                    CleanDirectory(path);
+                }
 
                 _logger.LogInformation("Cleaning done. Next run in 3 days.");
                 await Task.Delay(TimeSpan.FromDays(3), stoppingToken);
