@@ -10,7 +10,7 @@ A lightweight Windows Background Service built with **.NET Worker Service** that
 - Automatically deletes files and folders inside the user temp folder (`%TEMP%`)
 - Skips files that are currently in use or protected by access permissions
 - Runs silently in the background as a Windows Service
-- Logs every action (deleted files, skipped files, errors) using the built-in .NET logger
+- Logs every action (deleted files, skipped files, errors)
 - Repeats the cleaning cycle every **3 days** automatically
 
 ---
